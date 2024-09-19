@@ -1,0 +1,134 @@
+.Dashboardgrid {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-rows: 30px repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr) 100px;
+    grid-template-areas: 
+        "box5 box5 box5 box5 box5 box5"
+        "box1 box1 box1 box1 box2 box2"
+        "box3 box3 box4 box4 box2 box2"
+        "box3 box3 box4 box4 box2 box2"
+        "box6 box6 box6 box7 box7 box7"
+        "box6 box6 box6 box7 box7 box7"
+        "box6 box6 box6 box7 box7 box7";
+    gap:5px
+}
+.boxbox{
+    display: flex;
+    justify-content: center;
+    box-shadow: 1px 1px 10px rgb(255, 255, 255,.1), -1px -1px 10px rgb(0, 0, 0,.1);
+    border-radius: 8px;
+}
+.box1 {
+    grid-area: box1;
+    display: flex;
+    gap:10px;
+    
+}
+.box2 {
+    grid-area: box2;
+    display: inline;
+    overflow: hidden;
+}
+.moneyD{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    height: 30%;
+    background: linear-gradient(to bottom,#2af355,#aaffbc);
+    box-shadow: 5px 0 20px #cafdd5;
+}
+.moneyD p{
+    color: #28a745;
+    font: 2.3em sans-serif;
+}
+.moneyRoom{
+    padding: 5px;
+    height: 30%;
+}
+.moneyRoom .mRoom{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px ;
+    border-left:2px solid rgb(147, 18, 222,0.2) ;
+}
+
+.moneyFood{
+    padding: 5px;
+    height: 40%;
+    /* background: #0c0291; */
+}
+.box3 {
+    grid-area: box3;
+}
+.box4 {
+    grid-area: box4;
+}
+.box5 {
+    grid-area: box5;
+}
+.box6 {
+    grid-area: box6;
+    display: flex;
+    justify-content: end;
+}
+.box7 {
+    grid-area: box7;
+    /* background: #da3936; */
+}
+
+.cardItem{
+    width: calc(100%/4);
+    height: 100%;
+    background: white;
+    box-shadow: 2px 2px 5px rgb(255, 255, 255,.1), -2px -2px 5px rgb(0, 0, 0,.1);
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+}
+.cardItem span:nth-child(1) {
+    position: absolute;
+    width: 50px;
+    font-size: 2rem;
+    text-align: center;
+    top: 3px;
+    left: 4px;
+    color: #000000;
+    z-index: 1;
+}
+.cardItem span:nth-child(2) {
+    position: absolute;
+    font-size: 5.5em;
+    top: 3px;
+    right: -15px;
+    opacity: 1;
+    color: #e83e8c;
+    z-index: 0;
+}
+.cardItem span:nth-child(3) {
+    position: absolute;
+    font-size: 0.9em;
+    top: 35px;
+    left: 6px;
+    opacity: 0.2;
+    color: rgba(0, 0, 0, 0.722);
+    z-index: 0;
+}
+.cardTem1{
+    
+}
+
+.cardTem2{
+    /* background: linear-gradient(125deg,#3838f9,#8f8fd4); */
+}
+.cardTem3{
+    /* background: linear-gradient(125deg,#0c0291,#4e57ff); */
+}
+.cardTem4{
+    /* background: linear-gradient(125deg,#026589,#6dd8ff); */
+}

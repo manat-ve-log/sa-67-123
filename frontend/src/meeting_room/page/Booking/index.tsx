@@ -34,6 +34,7 @@ function Index() {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [bookingIdToCancel, setBookingIdToCancel] = useState<number | null>(null);
+    const [imageSrc, setImageSrc] = useState('');
 
     const onClickSwitchA = () => {
         setSwitchRoom(true);
@@ -91,8 +92,12 @@ function Index() {
             setLoading(true);
             const res = await GetMeetingRooms();
             if (res) {
-                setRooms(res);
+                setRooms(res);              
+                res.forEach( room => {
+                    console.log(room.Image);
+                });
             }
+            
         } catch (error) {
             console.error('Failed to fetch meeting rooms:', error);
             setError('Failed to fetch meeting rooms.');
@@ -197,13 +202,24 @@ function Index() {
             </div>
             {switchRoom && switchList &&(
                 <div className='BookingShowData'>
-                    <div className="BookingShowDataGrid" >
+                    <div className="BookingShowDataFlex" >
                         {rooms.length > 0 ? (
                             rooms.map(room => (
-                                
-                                <div className='BookingList' onClick={() => onClickShowPopup(room)} key={room.ID}>
-                                    <p>{room.RoomName}</p>
-                                </div>
+                                <div
+                                    className='BookingList'
+                                    onClick={() => onClickShowPopup(room)}
+                                    key={room.ID}
+                                    style={{ 
+                                        backgroundImage: `url(${room.Image})`, 
+                                        backgroundSize: 'cover',      // ปรับขนาดภาพพื้นหลังให้ครอบคลุมพื้นที่
+                                        backgroundPosition: 'center', // จัดตำแหน่งภาพให้อยู่ตรงกลาง
+                                        position: 'relative',
+                                    }}     
+                                >
+                                <p>
+                                    {room.RoomName} 
+                                </p>
+                            </div>
                             
                             ))
                             

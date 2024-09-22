@@ -111,7 +111,8 @@
     width: 100%;
     grid-template-columns: 50px 100px repeat(1, 1fr)100px 100px 100px 100px 100px 50px;
     align-content: center;
-    height: auto;
+    min-height: 150px;
+    max-height:300px ;
     gap: 10px;
     padding: 0 10px;
     border-radius: 5px;
@@ -165,8 +166,8 @@
 }
 .EditBox{
     position: relative;
-    width: 600px;
-    height: 550px;
+    width: 550px;
+    height: 570px;
     background-color: rgb(255, 255, 255);
     display: flex;
     align-items: center;

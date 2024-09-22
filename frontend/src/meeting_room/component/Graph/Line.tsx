@@ -1,45 +1,59 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
+import { GetListPaymentsPerMonth } from '../../../dashboard/sevice/https';
 
-// Register the necessary components
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
-
+// Register the necessary components, including Filler for filling under the line
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
+interface paymentPerMonth {
+  PaymentMonth?:string;
+  TotalAmount?:number;
+}
 const LineChart = () => {
-  // Define the data for the Line chart
-  const data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    datasets: [
-        {
-          label: 'Food Revenue',
-          data: [12000, 13500, 15000, 14500, 16000, 17000, 17500, 18000, 16500, 15500, 15000, 14000],
-          fill: false, 
-          borderColor: 'rgb(75, 19, 192)', 
-          tension: 0.5, 
-        },
-        {
-          label: 'Room Revenue',
-          data: [20000, 22000, 21000, 23000, 24000, 25000, 24500, 26000, 25500, 25000, 24000, 23500],
-          fill: false, 
-          borderColor: 'rgb(75, 192, 19)', 
-          tension: 0.5, 
-        },
-        {
-          label: 'Seminar Room Revenue',
-          data: [8000, 8500, 9000, 9500, 9200, 8800, 8700, 8900, 8600, 8400, 8300, 8200],
-          fill: false, 
-          borderColor: 'rgb(233, 192, 192)', 
-          tension: 0.5, 
-        },
-      ],
+  const [paymentPerMonth,setPaymentPerMongh] = useState<paymentPerMonth[]>([])
+  const fetchPeopleParMonth = async () => {
+    try {
+      const res = await GetListPaymentsPerMonth();
+      if (res) {
+        setPaymentPerMongh(res);
+      }
+    } catch (error) {
+      console.error("Error fetching people per month:", error);
+    }
   };
-  
 
-  // Define the options for the Line chart
+  useEffect(() => {
+    fetchPeopleParMonth();
+  }, []);
+  
+  const label =  ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+  const totals = label.map(month => {
+    const data = paymentPerMonth.find(p => p.PaymentMonth === month);
+    return data ? data.TotalAmount : 0;  // If there's data for that month, use it; otherwise, 0
+  });
+
+  const data = {
+    labels: label,
+    datasets: [
+      {
+        label: 'Balance',
+        data: totals,
+        fill: 'start', // Fill from the start to the bottom of the graph
+        borderColor: 'rgb(82, 196, 26)', // Line color
+        backgroundColor: 'rgba(82, 196, 26, 0.3)', // Semi-transparent fill color
+        tension: 0.5,
+      },
+    ],
+  };
+
   const options = {
     plugins: {
       legend: {
-        position: 'bottom', // Position of the legend (e.g., 'top', 'bottom', 'left', 'right')
+        position: 'bottom', // Position of the legend
+      },
+      filler: {
+        propagate: false,
       },
     },
     scales: {
@@ -50,7 +64,7 @@ const LineChart = () => {
   };
 
   return (
-    <div style={{width:'100%',height:'98%',display:'flex',justifyContent:'end'}}>
+    <div style={{ width: '100%',height:'100%', display: 'flex', justifyContent: 'center' }}>
       <Line data={data} options={options} />
     </div>
   );

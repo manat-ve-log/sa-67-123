@@ -91,7 +91,7 @@ async function UpdateMeetingRoom(data: MeetingInterface) {
   };
 
   try {
-    const res = await fetch(`${apiUrl}/meetingRoom`, requestOptions);
+    const res = await fetch(`${apiUrl}/meetingRoom/${data.ID}`, requestOptions);
 
     // ตรวจสอบสถานะการตอบสนอง
     if (res.status === 200) {

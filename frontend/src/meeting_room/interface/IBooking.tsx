@@ -24,6 +24,7 @@ export interface BookingInterface {
         Detail: string;
         RoomSize: number;
         AirCondition: number;
+        Image:string;
         Chair: number;
         Type: string;
     };

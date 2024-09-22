@@ -6,7 +6,7 @@ export interface MeetingInterface {
     RoomSize?:number;
     AirCondition?:number;
     Chair?:number;
-    Type?:string
-    Customers?: any; 
+    Type?:string;
+    Image?:string;
 }
 

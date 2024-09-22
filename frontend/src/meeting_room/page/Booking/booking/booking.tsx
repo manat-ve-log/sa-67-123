@@ -158,8 +158,8 @@ const Booking: React.FC<bookingNew> = ({ room }) => {
       <div style={{
         width:'300px',
         height:"50px",
-        // background:'red',
         display:'flex',
+        justifyContent:'end',
         flexDirection:'column',
         alignItems:'center',
         marginBottom:'20px',
